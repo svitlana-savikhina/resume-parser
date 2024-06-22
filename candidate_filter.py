@@ -21,9 +21,27 @@ def filter_candidates_by_keyword(input_file_path, keyword, output_file_path):
         writer.writerows(filtered_candidates)
 
 
-keyword = "продавець"
-input_file_path = "robota_ua_parser_with_scores/resume_from_robota_ua.csv"
-output_file_path = "robota_ua_parser_with_scores/filtered_candidates_from_robota_ua.csv"
-filter_candidates_by_keyword(input_file_path, keyword, output_file_path)
+def main():
+    # Prompt the user for a keyword to filter
+    keyword = input("Enter a keyword to filter candidates: ")
 
-print(f"Filtered candidates by keyword '{keyword}' saved to {output_file_path}")
+    # Prompt the user to select a site
+    site = input("Enter the site to search (work.ua or robota.ua): ").strip().lower()
+
+    # Define file paths depending on the selected site
+    if site == "work.ua":
+        input_file_path = "work_ua_parser_with_scores/resumes_from_work_ua.csv"
+        output_file_path = "work_ua_parser_with_scores/filtered_candidates_from_work_ua.csv"
+    elif site == "robota.ua":
+        input_file_path = "robota_ua_parser_with_scores/resumes_from_robota_ua.csv"
+        output_file_path = "robota_ua_parser_with_scores/filtered_candidates_from_robota_ua.csv"
+    else:
+        print("Invalid site selected. Please enter 'work.ua' or 'robota.ua'.")
+        return
+
+    # Perform candidate filtering
+    filter_candidates_by_keyword(input_file_path, keyword, output_file_path)
+
+
+if __name__ == "__main__":
+    main()
