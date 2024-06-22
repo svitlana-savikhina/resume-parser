@@ -112,7 +112,7 @@ class ResumeParser:
         return all_resumes
 
 
-url = "https://www.work.ua/resumes/"
-parser = ResumeParser(url)
+URL = "https://www.work.ua/resumes/"
+parser = ResumeParser(URL)
 all_resumes = parser.parse_all_pages(max_pages=100, num_threads=10)
 parser.save_to_csv(all_resumes)

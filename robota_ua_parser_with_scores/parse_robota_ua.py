@@ -6,14 +6,13 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from concurrent.futures import ThreadPoolExecutor
 
-url = "https://robota.ua/ru/candidates/all/ukraine"
+URL = "https://robota.ua/ru/candidates/all/ukraine"
 
 
 def process_page(driver, page_num):
-    driver.get(f"{url}?page={page_num}")
+    driver.get(f"{URL}?page={page_num}")
     page = driver.page_source
     soup = BeautifulSoup(page, "html.parser")
-    # print(soup.prettify())
 
     resumes = []
 
@@ -89,8 +88,8 @@ def scrape_resume_data():
     driver = webdriver.Chrome(service=service)
 
     try:
-        max_pages = 4
-        num_threads = 2
+        max_pages = 50
+        num_threads = 5
 
         with ThreadPoolExecutor(max_workers=num_threads) as executor:
             all_resumes = []
